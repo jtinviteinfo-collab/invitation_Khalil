@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soirée Jeune de Khalil - حنة السلطان</title>
+    <!-- Polices arabes calligraphiques et orientales luxueuses -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #FBF9F4;
+            --gold: #D4AF37;
+            --gold-dark: #B58E22;
+            --gold-light: #F3E5AB;
+            --text-dark: #2C241E;
+            --border-gold: #C5A059;
+            --burgundy: #6b1d2f;
+            --burgundy-dark: #4e1321;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #EFEAE1;
+            background-image: radial-gradient(circle, rgba(212, 175, 55, 0.12) 1.5px, transparent 1.5px), 
+                              linear-gradient(135deg, #FBF9F4 0%, #EFE8DC 100%);
+            background-size: 24px 24px, 100% 100%;
+            color: var(--text-dark);
+            font-family: 'Amiri', serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ÉCRAN DE SÉLECTION DE LANGUE */
+        #language-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(78, 19, 33, 0.92), rgba(44, 36, 30, 0.92)), url('photo-khalil.jpg') no-repeat center center/cover;
+            background-blend-mode: overlay;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .lang-card {
+            background: rgba(251, 249, 244, 0.98);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+            border: 2px solid var(--gold);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .lang-card h1 {
+            font-family: 'Cinzel', serif;
+            color: var(--burgundy);
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .lang-card h2 {
+            font-family: 'Amiri', serif;
+            color: var(--gold-dark);
+            font-size: 23px;
+            margin-bottom: 25px;
+        }
+
+        .lang-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            background: var(--burgundy);
+            color: white;
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cinzel', serif;
+        }
+
+        .lang-btn:hover {
+            background: var(--gold);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+        }
+
+        /* CONTENEUR PRINCIPAL DE L'INVITATION (FORMAT SMARTPHONE PLEIN ÉCRAN) */
+        #main-content {
+            display: none;
+            width: 100%;
+            max-width: 480px;
+            min-height: 100vh;
+            background-color: var(--bg-cream);
+            background-image: radial-gradient(circle, rgba(212, 175, 55, 0.08) 1px, transparent 1px);
+            background-size: 20px 20px;
+            box-shadow: 0 0 35px rgba(78, 19, 33, 0.18);
+            position: relative;
+            padding: 30px 20px 0;
+            border-left: 4px double var(--border-gold);
+            border-right: 4px double var(--border-gold);
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* LECTEUR AUDIO FLOTTANT */
+        .audio-control {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: var(--burgundy);
+            color: var(--gold-light);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        /* EN-TÊTE ORNEMENTAL */
+        .ornament-header {
+            text-align: center;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .bismillah {
+            font-size: 1.9rem;
+            color: var(--burgundy);
+            font-family: 'Aref Ruqaa', 'Amiri', serif;
+            margin-bottom: 5px;
+        }
+
+        .sub-bismillah {
+            font-size: 1rem;
+            color: #6b5e54;
+            margin-bottom: 12px;
+            font-family: 'Amiri', serif;
+        }
+
+        .divider-ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-dark);
+            margin: 10px 0 18px;
+            font-size: 1.2rem;
+        }
+
+        .divider-ornament::before, .divider-ornament::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 0 15px;
+        }
+
+        /* PARENTS / FAMILLE QUI INVITE */
+        .family-intro {
+            font-size: 1.15rem;
+            color: #5c5046;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .family-name {
+            font-size: 1.55rem;
+            line-height: 1.7;
+            color: var(--burgundy);
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 18px;
+            font-family: 'Amiri', serif;
+        }
+
+        /* TITRE ARABESQUE ROYAL : حنة السلطان / ابنهما / خليل */
+        .royal-title-block {
+            text-align: center;
+            margin: 10px 0 20px;
+            padding: 12px 20px;
+            width: 100%;
+            border-top: 1px solid rgba(212, 175, 55, 0.35);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.08), transparent);
+        }
+
+        .arabesque-event-title {
+            font-family: 'Aref Ruqaa', 'Cinzel', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--gold-dark);
+            text-shadow: 0 2px 4px rgba(107, 29, 47, 0.12);
+            line-height: 1.4;
+        }
+
+        .arabesque-son-label {
+            font-family: 'Amiri', serif;
+            font-size: 1.25rem;
+            color: var(--burgundy);
+            margin: 4px 0;
+            font-style: italic;
+        }
+
+        .arabesque-groom-name {
+            font-family: 'Aref Ruqaa', 'Cinzel', serif;
+            font-size: 2.9rem;
+            font-weight: 700;
+            color: var(--burgundy);
+            line-height: 1.3;
+            letter-spacing: 1px;
+        }
+
+        /* CADRE ROYAL DE LA PHOTO (ARCHE ORIENTALE) */
+        .photo-frame-container {
+            position: relative;
+            width: 265px;
+            height: 360px;
+            margin: 15px auto 25px;
+            padding: 8px;
+            background: white;
+            border-radius: 135px 135px 16px 16px;
+            border: 3px solid var(--gold);
+            box-shadow: 0 10px 28px rgba(107, 29, 47, 0.18);
+        }
+
+        .groom-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 125px 125px 10px 10px;
+        }
+
+        /* TEXTE CINÉMATIQUE (APPARITION PROGRESSIVE LIGNE PAR LIGNE) */
+        .cinematic-text {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: var(--text-dark);
+            text-align: center;
+            margin: 10px 0 20px;
+            padding: 0 12px;
+        }
+
+        .cinematic-line {
+            display: block;
+            opacity: 0;
+            transform: translateY(14px);
+            animation: cinematicReveal 1.3s ease forwards;
+        }
+
+        .cinematic-line:nth-child(1) { animation-delay: 0.4s; }
+        .cinematic-line:nth-child(2) { animation-delay: 1.3s; }
+        .cinematic-line:nth-child(3) { animation-delay: 2.2s; }
+
+        @keyframes cinematicReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* SECTION PROGRAMME ET LIEU */
+        .program-section {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--gold);
+            border-radius: 14px;
+            padding: 22px 18px;
+            margin: 15px 0;
+            text-align: center;
+            box-shadow: 0 6px 18px rgba(107, 29, 47, 0.06);
+        }
+
+        .program-block {
+            margin-bottom: 12px;
+        }
+
+        .program-title {
+            font-size: 1.45rem;
+            color: var(--burgundy);
+            font-weight: bold;
+            font-family: 'Amiri', serif;
+        }
+
+        .program-time {
+            font-size: 1.15rem;
+            color: #4a3f35;
+            margin-top: 4px;
+        }
+
+        .venue-name {
+            font-size: 1.3rem;
+            color: var(--burgundy);
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .venue-city {
+            font-size: 1.05rem;
+            color: #665a4e;
+            margin-bottom: 14px;
+        }
+
+        .map-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 5px;
+            padding: 11px 22px;
+            background: var(--burgundy);
+            color: white;
+            text-decoration: none;
+            border: 1px solid var(--gold);
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(107, 29, 47, 0.25);
+            transition: all 0.3s;
+        }
+
+        .map-btn:hover {
+            background: var(--gold);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+        }
+
+        /* FORMULAIRE RSVP */
+        .rsvp-container {
+            width: 100%;
+            background: #FAF6EE;
+            border: 1px solid var(--gold);
+            border-radius: 14px;
+            padding: 20px;
+            margin: 15px 0 25px;
+        }
+
+        .rsvp-container h3 {
+            text-align: center;
+            color: var(--burgundy);
+            margin-bottom: 15px;
+            font-family: 'Cinzel', 'Amiri', serif;
+            font-size: 1.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: bold;
+            font-size: 1rem;
+            color: var(--burgundy);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d5cab8;
+            border-radius: 8px;
+            font-family: inherit;
+            background: white;
+            font-size: 1rem;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: #1f1712;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-family: 'Cinzel', 'Amiri', serif;
+            box-shadow: 0 4px 12px rgba(181, 142, 34, 0.3);
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--burgundy);
+            color: white;
+        }
+
+        /* BANNIÈRE PIED DE PAGE JT'INVITE (HARMONISÉE BORDEAUX & OR) */
+        footer {
+            width: calc(100% + 40px);
+            margin-left: -20px;
+            margin-right: -20px;
+            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-dark) 100%);
+            color: #FBF9F4;
+            padding: 16px 15px;
+            text-align: center;
+            border-top: 2px solid var(--gold);
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+        }
+
+        .footer-logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid var(--gold);
+        }
+
+        footer a {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ÉCRAN DE SÉLECTION DE LANGUE -->
+    <div id="language-screen">
+        <div class="lang-card">
+            <h1>jt'INvite</h1>
+            <h2>اختر اللغة / Choose Language</h2>
+            <button class="lang-btn" onclick="selectLanguage('ar')">العربية</button>
+            <button class="lang-btn" onclick="selectLanguage('fr')">Français</button>
+            <button class="lang-btn" onclick="selectLanguage('en')">English</button>
+        </div>
+    </div>
+
+    <!-- AUDIO DE FOND -->
+    <audio id="bg-music" loop>
+        <source src="musique.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas l'audio.
+    </audio>
+    <button class="audio-control" id="audio-toggle" onclick="toggleAudio()" title="Musique">🎵</button>
+
+    <!-- CONTENU PRINCIPAL PLEIN ÉCRAN SMARTPHONE -->
+    <div id="main-content">
+        
+        <!-- EN-TÊTE ORNEMENTAL -->
+        <div class="ornament-header">
+            <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <div class="sub-bismillah" id="sub-bismillah-text">والصلاة والسلام على أشرف المرسلين</div>
+            <div class="divider-ornament">❖</div>
+        </div>
+
+        <!-- NOMS DU PÈRE ET DE LA MÈRE -->
+        <div class="family-intro" id="family-intro-text">تتشرف عائلة</div>
+        <div class="family-name" id="family-name-text">السيد محمد رشاد بوشوشة<br>وحرمه ثريا الوسلاتي</div>
+
+        <!-- TITRE ARABESQUE APRÈS LES PARENTS : حنة السلطان / ابنهما / خليل -->
+        <div class="royal-title-block">
+            <div class="arabesque-event-title" id="event-title-display">حنة السلطان</div>
+            <div class="arabesque-son-label" id="son-label-display">ابنهما</div>
+            <div class="arabesque-groom-name" id="groom-name-display">خليل</div>
+        </div>
+
+        <!-- CADRE ROYAL & PHOTO CENTRÉE DE KHALIL -->
+        <div class="photo-frame-container">
+            <img src="photo-khalil.jpg" alt="Khalil" class="groom-photo">
+        </div>
+
+        <!-- TEXTE CINÉMATIQUE -->
+        <div class="cinematic-text" id="cinematic-text-content">
+            <span class="cinematic-line">السلام عليكم ورحمة الله وبركاته</span>
+            <span class="cinematic-line">اللهم بارك له وبارك عليه وتمم له بالخير والسعادة</span>
+            <span class="cinematic-line">ندعوكم بحرارة لمشاركة فرحتنا في هذه السهرة المميزة.</span>
+        </div>
+
+        <!-- PROGRAMME & LIEU -->
+        <div class="program-section">
+            <div class="program-block">
+                <div class="program-title" id="prog-title-1">حفل عشاء وسهرة</div>
+                <div class="program-time" id="prog-time-text">بداية من الساعة 19:00 مساءً</div>
+            </div>
+            
+            <div class="divider-ornament" style="margin: 8px 0 12px;">❖</div>
+
+            <div class="program-block">
+                <div class="venue-name" id="venue-name-text">قاعة الأفراح لؤلؤة (La Perle)</div>
+                <div class="venue-city" id="venue-city-text">منوبة، تونس</div>
+                <a href="https://maps.google.com/?q=R35R+X7M,+Manouba,+Tunisie" target="_blank" class="map-btn" id="map-btn-text">
+                    📍 الموقع على الخريطة
+                </a>
+            </div>
+        </div>
+
+        <!-- FORMULAIRE RSVP DIRECT VERS EMAIL -->
+        <div class="rsvp-container">
+            <h3 id="rsvp-heading">تأكيد الحضور (RSVP)</h3>
+            <form action="mailto:jtinvite.info@gmail.com" method="POST" enctype="text/plain">
+                <div class="form-group">
+                    <label id="label-name">الاسم واللقب :</label>
+                    <input type="text" name="Nom_Invite" required placeholder="Votre nom complet">
+                </div>
+                <div class="form-group">
+                    <label id="label-presence">حالة الحضور :</label>
+                    <select name="Presence">
+                        <option value="Sera present">حاضر بحول الله (Présent)</option>
+                        <option value="Absent">للأسف لن أتمكن (Absent)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label id="label-msg">رسالة للعريس :</label>
+                    <textarea name="Message" rows="2" placeholder="Votre petit mot pour Khalil..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn" id="submit-btn-text">إرسال الرد</button>
+            </form>
+        </div>
+
+        <!-- BANNIÈRE PIED DE PAGE JT'INVITE -->
+        <footer>
+            <div class="footer-content">
+                <img src="logo-jtinvite.png" alt="Logo jt'INvite" class="footer-logo">
+                <span id="footer-credit">Créé par jt'INvite</span>
+                <span>•</span>
+                <a href="https://jtinvite.netlify.app" target="_blank">jtinvite.netlify.app</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        const translations = {
+            ar: {
+                subBismillah: "والصلاة والسلام على أشرف المرسلين",
+                familyIntro: "تتشرف عائلة",
+                familyName: "السيد محمد رشاد بوشوشة<br>وحرمه ثريا الوسلاتي",
+                eventTitle: "حنة السلطان",
+                sonLabel: "ابنهما",
+                groomName: "خليل",
+                cinematicLines: [
+                    "السلام عليكم ورحمة الله وبركاته",
+                    "اللهم بارك له وبارك عليه وتمم له بالخير والسعادة",
+                    "بحضوركم تكتمل فرحتنا، ويسعدنا دعوتكم لحضور حفل العشاء والسهرة."
+                ],
+                progTitle: "حفل عشاء وسهرة",
+                progTime: "بداية من الساعة 19:00 مساءً",
+                venueName: "قاعة الأفراح لؤلؤة (La Perle)",
+                venueCity: "منوبة، تونس",
+                mapBtn: "📍 الموقع على الخريطة",
+                rsvpHeading: "تأكيد الحضور (RSVP)",
+                labelName: "الاسم واللقب :",
+                labelPresence: "حالة الحضور :",
+                labelMsg: "رسالة للعريس :",
+                submitBtn: "إرسال الرد",
+                footerCredit: "صُنع بواسطة jt'INvite"
+            },
+            fr: {
+                subBismillah: "Que la bénédiction soit sur notre cher Khalil",
+                familyIntro: "La famille de",
+                familyName: "Monsieur Mohamed Rached Bouchoucha<br>& son épouse Thouraya Oueslati",
+                eventTitle: "Soirée Jeune de Khalil",
+                sonLabel: "leur cher fils",
+                groomName: "Khalil",
+                cinematicLines: [
+                    "Assalamu alaykum wa rahmatullah.",
+                    "Que Dieu le bénisse et comble sa vie de bonheur et de prospérité.",
+                    "Nous avons l'immense joie de vous convier au dîner et à la soirée."
+                ],
+                progTitle: "Dîner et Soirée",
+                progTime: "À partir de 19h00",
+                venueName: "Salle des Fêtes La Perle (لؤلؤة)",
+                venueCity: "Manouba, Tunisie",
+                mapBtn: "📍 Ouvrir sur Google Maps",
+                rsvpHeading: "Confirmation de présence (RSVP)",
+                labelName: "Nom et Prénom :",
+                labelPresence: "Statut de présence :",
+                labelMsg: "Un mot pour le marié :",
+                submitBtn: "Envoyer ma réponse",
+                footerCredit: "Créé par jt'INvite"
+            },
+            en: {
+                subBismillah: "Blessings upon our beloved Khalil",
+                familyIntro: "The family of",
+                familyName: "Mr. Mohamed Rached Bouchoucha<br>& his wife Thouraya Oueslati",
+                eventTitle: "Khalil's Bachelor Evening",
+                sonLabel: "their beloved son",
+                groomName: "Khalil",
+                cinematicLines: [
+                    "Peace and blessings be upon you.",
+                    "May God bless him and fill his life with joy and happiness.",
+                    "We are honored to invite you to the celebratory dinner and evening party."
+                ],
+                progTitle: "Dinner & Evening Party",
+                progTime: "Starting at 7:00 PM",
+                venueName: "La Perle Banquet Hall (لؤلؤة)",
+                venueCity: "Manouba, Tunisia",
+                mapBtn: "📍 View on Google Maps",
+                rsvpHeading: "RSVP / Confirmation",
+                labelName: "Full Name :",
+                labelPresence: "Attendance :",
+                labelMsg: "Message for the groom :",
+                submitBtn: "Send RSVP",
+                footerCredit: "Created by jt'INvite"
+            }
+        };
+
+        const music = document.getElementById('bg-music');
+        let musicPlaying = false;
+
+        function selectLanguage(lang) {
+            document.getElementById('language-screen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'flex';
+
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+            document.documentElement.lang = lang;
+
+            const t = translations[lang];
+            document.getElementById('sub-bismillah-text').innerHTML = t.subBismillah;
+            document.getElementById('family-intro-text').innerHTML = t.familyIntro;
+            document.getElementById('family-name-text').innerHTML = t.familyName;
+            document.getElementById('event-title-display').innerHTML = t.eventTitle;
+            document.getElementById('son-label-display').innerHTML = t.sonLabel;
+            document.getElementById('groom-name-display').innerHTML = t.groomName;
+
+            // Injection cinématique ligne par ligne
+            const cinematicContainer = document.getElementById('cinematic-text-content');
+            cinematicContainer.innerHTML = t.cinematicLines
+                .map(line => `<span class="cinematic-line">${line}</span>`)
+                .join('');
+
+            document.getElementById('prog-title-1').innerHTML = t.progTitle;
+            document.getElementById('prog-time-text').innerHTML = t.progTime;
+            document.getElementById('venue-name-text').innerHTML = t.venueName;
+            document.getElementById('venue-city-text').innerHTML = t.venueCity;
+            document.getElementById('map-btn-text').innerHTML = t.mapBtn;
+            document.getElementById('rsvp-heading').innerHTML = t.rsvpHeading;
+            document.getElementById('label-name').innerHTML = t.labelName;
+            document.getElementById('label-presence').innerHTML = t.labelPresence;
+            document.getElementById('label-msg').innerHTML = t.labelMsg;
+            document.getElementById('submit-btn-text').innerHTML = t.submitBtn;
+            document.getElementById('footer-credit').innerHTML = t.footerCredit;
+
+            music.play().then(() => {
+                musicPlaying = true;
+                document.getElementById('audio-toggle').innerHTML = '🔊';
+            }).catch(() => {
+                console.log("Lecture audio automatique bloquée par le navigateur.");
+            });
+        }
+
+        function toggleAudio() {
+            if (musicPlaying) {
+                music.pause();
+                document.getElementById('audio-toggle').innerHTML = '🔇';
+                musicPlaying = false;
+            } else {
+                music.play();
+                document.getElementById('audio-toggle').innerHTML = '🔊';
+                musicPlaying = true;
+            }
+        }
+    </script>
+</body>
+</html>
