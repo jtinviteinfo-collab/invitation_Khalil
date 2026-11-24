@@ -251,7 +251,7 @@
             border-radius: 125px 125px 10px 10px;
         }
 
-        /* TEXTE CINÉMATIQUE (APPARITION PROGRESSIVE LIGNE PAR LIGNE) */
+        /* TEXTE CINÉMATIQUE */
         .cinematic-text {
             font-size: 1.25rem;
             line-height: 1.9;
@@ -405,7 +405,7 @@
             color: white;
         }
 
-        /* BANNIÈRE PIED DE PAGE JT'INVITE (HARMONISÉE BORDEAUX & OR) */
+        /* BANNIÈRE PIED DE PAGE JT'INVITE (HARMONISÉE & AVEC INSTAGRAM) */
         footer {
             width: calc(100% + 40px);
             margin-left: -20px;
@@ -422,9 +422,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
             font-size: 0.95rem;
+        }
+
+        .footer-logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
         }
 
         .footer-logo {
@@ -433,15 +439,45 @@
             border-radius: 50%;
             object-fit: cover;
             border: 1.5px solid var(--gold);
+            transition: transform 0.2s;
         }
 
-        footer a {
+        .footer-logo:hover {
+            transform: scale(1.08);
+        }
+
+        .instagram-icon-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            color: var(--gold-light);
+            transition: all 0.2s;
+        }
+
+        .instagram-icon-link:hover {
+            background: var(--gold);
+            color: var(--burgundy-dark);
+            transform: scale(1.1);
+        }
+
+        .instagram-icon-link svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        footer a.text-link {
             color: var(--gold-light);
             text-decoration: none;
             font-weight: bold;
         }
 
-        footer a:hover {
+        footer a.text-link:hover {
             text-decoration: underline;
             color: white;
         }
@@ -481,7 +517,7 @@
         <div class="family-intro" id="family-intro-text">تتشرف عائلة</div>
         <div class="family-name" id="family-name-text">السيد محمد رشاد بوشوشة<br>وحرمه ثريا الوسلاتي</div>
 
-        <!-- TITRE ARABESQUE APRÈS LES PARENTS : حنة السلطان / ابنهما / خليل -->
+        <!-- TITRE ARABESQUE : حنة السلطان / ابنهما / خليل -->
         <div class="royal-title-block">
             <div class="arabesque-event-title" id="event-title-display">حنة السلطان</div>
             <div class="arabesque-son-label" id="son-label-display">ابنهما</div>
@@ -541,13 +577,23 @@
             </form>
         </div>
 
-        <!-- BANNIÈRE PIED DE PAGE JT'INVITE -->
+        <!-- BANNIÈRE PIED DE PAGE JT'INVITE AVEC LIEN INSTAGRAM ET NETLIFY -->
         <footer>
             <div class="footer-content">
-                <img src="logo-jtinvite.png" alt="Logo jt'INvite" class="footer-logo">
+                <!-- Logo cliquable vers Instagram -->
+                <a href="https://www.instagram.com/jt_invite" target="_blank" class="footer-logo-link" title="Suivez jt'INvite sur Instagram">
+                    <img src="logo-jtinvite.png" alt="Logo jt'INvite" class="footer-logo">
+                </a>
+                
                 <span id="footer-credit">Créé par jt'INvite</span>
+
+                <!-- Icône Instagram dédiée -->
+                <a href="https://www.instagram.com/jt_invite" target="_blank" class="instagram-icon-link" title="Instagram jt'INvite">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+
                 <span>•</span>
-                <a href="https://jtinvite.netlify.app" target="_blank">jtinvite.netlify.app</a>
+                <a href="https://jtinvite.netlify.app" target="_blank" class="text-link">jtinvite.netlify.app</a>
             </div>
         </footer>
 
@@ -647,7 +693,6 @@
             document.getElementById('son-label-display').innerHTML = t.sonLabel;
             document.getElementById('groom-name-display').innerHTML = t.groomName;
 
-            // Injection cinématique ligne par ligne
             const cinematicContainer = document.getElementById('cinematic-text-content');
             cinematicContainer.innerHTML = t.cinematicLines
                 .map(line => `<span class="cinematic-line">${line}</span>`)
